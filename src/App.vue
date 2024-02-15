@@ -1,3 +1,17 @@
+<template>
+  My App
+  <Header />
+  <div class="container">
+    <Balance :total="+total" />
+    <IncomeExpenses :income="+income" :expenses="+expenses" />
+    <TransactionList :transactions="transactions" />
+    <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
+  </div>
+</template>
+
+
+
+
 <script setup>
 import { ref, computed } from 'vue';
 import Header from '@/components/Header.vue';
@@ -37,15 +51,20 @@ const expenses = computed(() => {
     }, 0)
     .toFixed(2);
 })
+
+const handleTransactionSubmitted = (transactionData) => {
+  console.log(transactionData);
+  transactions.value.push({
+    id: generateUniqueId(),
+    text: transactionData.text,
+    amount: transactionData.amount
+  });
+};
+
+const generateUniqueId = () => {
+  return Math.floor(Math.random() * 1000000);
+};
+
 </script>
 
-<template> My App
-<Header />
-<div class="container">
-  <Balance :total="total" />
-  <IncomeExpenses :income="+income" :expenses="+expenses" />
-  <TransactionList :transactions="transactions" />
-  <AddTransaction />
-</div>
-</template>
 
