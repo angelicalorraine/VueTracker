@@ -23,7 +23,8 @@ import { useToast } from 'vue-toastification';
 
 const text = ref('');
 const amount = ref('');
-constn toast = useToast();
+const toast = useToast();
+
 const onSubmit = () => {
   if (!text.value || !amount.value) {
   
